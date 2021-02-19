@@ -48,15 +48,15 @@
                     if (valid) {
                         this.$axios({
                             method: "post",
-                            url: "http://localhost:8081/admin/login",
+                            url: this.baseUrl + "/admin/login",
                             data: this.param
                         }).then(response => {
                             // this.$message.success('登录成功');
                             if (response.data.code === 200) {
                                 // 登录成功
                                 this.$alert(response.data.message);
-                                localStorage.setItem('name', this.param.name);
-                                this.$router.push('/dashboard');
+                                localStorage.setItem('admin_name', this.param.name);
+                                this.$router.push('/');
                             } else {
                                 // 登录失败
                                 this.$alert(response.data.message);
@@ -73,9 +73,6 @@
             },
         },
         created() {
-            // this.$axios
-            //     .get('http://localhost:8081/hello')
-            //     .then(response => (console.log(response)));
         }
     }
 </script>
@@ -85,7 +82,7 @@
         position: relative;
         width: 100%;
         height: 100%;
-        background-image: url(../assets/img/login-bg.jpg);
+        background-image: url("../../assets/img/login-bg.jpg");
         background-size: 100%;
     }
     .ms-title {

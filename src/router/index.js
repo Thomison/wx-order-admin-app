@@ -9,31 +9,76 @@ const router =  new Router({
     routes: [
         {
             path: '/',
-            redirect: '/login'
+            redirect: '/dashboard',
+            meta: {
+                auth: false,
+            }
         },
         {
             path: '/login',
-            component: () => import('../components/Login'),
+            component: () => import('../components/page/Login'),
             meta: {
                 auth: false,
-                title: '登录界面'
             }
         },
         {
-            path: '/dashboard',
-            component: () => import('../components/Dashboard'),
-            meta: {
-                auth: true,
-                title: '系统首页'
-            }
+            path: '/',
+            component: () => import('../components/common/Home'),
+            meta: { title: '自述文件'},
+            children: [
+                {
+                    path: '/dashboard',
+                    component: () => import('../components/page/Dashboard'),
+                    meta: { title: '系统首页'},
+                },
+                {
+                    path: '/tabs',
+                    component: () => import(/* webpackChunkName: "tabs" */ '../components/page/Tabs.vue'),
+                    meta: { title: 'tab选项卡' }
+                },
+                {
+                    path: '/table',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/BaseTable.vue'),
+                    meta: { title: '基础表格' }
+                },
+                {
+                    path: '/form',
+                    component: () => import(/* webpackChunkName: "form" */ '../components/page/BaseForm.vue'),
+                    meta: { title: '基本表单' }
+                },
+                {
+                    path: '/icon',
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
+                    meta: { title: '自定义图标' }
+                },
+                {
+                    // 富文本编辑器组件
+                    path: '/editor',
+                    component: () => import(/* webpackChunkName: "editor" */ '../components/page/VueEditor.vue'),
+                    meta: { title: '富文本编辑器' }
+                },
+                {
+                    // markdown组件
+                    path: '/markdown',
+                    component: () => import(/* webpackChunkName: "markdown" */ '../components/page/Markdown.vue'),
+                    meta: { title: 'markdown编辑器' }
+                },
+                {
+                    // 图片上传组件
+                    path: '/upload',
+                    component: () => import(/* webpackChunkName: "upload" */ '../components/page/Upload.vue'),
+                    meta: { title: '文件上传' }
+                },
+                {
+                    path: '/404',
+                    component: () => import(/* webpackChunkName: "404" */ '../components/page/404.vue'),
+                    meta: { title: '404' }
+                },
+            ]
         },
         {
-            path: '/404',
-            component: () => import('../components/404'),
-            meta: {
-                auth: false,
-                title: '404'
-            }
+            path: '*',
+            redirect: '/404'
         }
     ]
 });
@@ -51,8 +96,8 @@ const router =  new Router({
 
 router.beforeEach(async (to, from, next) => {
     if (to.matched.some(record => record.meta.auth) && to.meta.auth) { // 判断该路由是否需要登录权限
-        let token = localStorage.getItem('name');
-        if (name) { // 获取当前的 token 是否存在
+        let token = localStorage.getItem('admin_name');
+        if (token) { // 获取当前的 token 是否存在
             next()
         } else {
             // 不存在 token，需要重新认证
