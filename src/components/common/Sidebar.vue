@@ -10,6 +10,7 @@
             unique-opened
             router
         >
+            <!--    一级菜单    -->
             <template v-for="item in items">
                 <template v-if="item.subs">
                     <el-submenu :index="item.index" :key="item.index">
@@ -17,12 +18,14 @@
                             <i :class="item.icon"></i>
                             <span slot="title">{{ item.title }}</span>
                         </template>
+                        <!--    二级菜单    -->
                         <template v-for="subItem in item.subs">
                             <el-submenu
                                 v-if="subItem.subs"
                                 :index="subItem.index"
                                 :key="subItem.index"
                             >
+                                <!--    三级菜单    -->
                                 <template slot="title">{{ subItem.title }}</template>
                                 <el-menu-item
                                     v-for="(threeItem,i) in subItem.subs"
@@ -74,26 +77,30 @@ export default {
                 {
                     icon: 'el-icon-lx-calendar',
                     index: '3',
-                    title: '表单相关',
+                    title: '商品相关',
                     subs: [
                         {
-                            index: 'form',
-                            title: '基本表单'
+                            index: 'category',
+                            title: '分类管理'
                         },
-                        {
-                            index: '3-2',
-                            title: '三级菜单',
-                            subs: [
-                                {
-                                    index: 'editor',
-                                    title: '富文本编辑器'
-                                },
-                                {
-                                    index: 'markdown',
-                                    title: 'markdown编辑器'
-                                }
-                            ]
-                        },
+                        // {
+                        //     index: '3-2',
+                        //     title: '商品管理'
+                        // },
+                        // {
+                        //     index: '3-2',
+                        //     title: '三级菜单',
+                        //     subs: [
+                        //         {
+                        //             index: 'editor',
+                        //             title: '富文本编辑器'
+                        //         },
+                        //         {
+                        //             index: 'markdown',
+                        //             title: 'markdown编辑器'
+                        //         }
+                        //     ]
+                        // },
                         {
                             index: 'upload',
                             title: '文件上传'
@@ -126,8 +133,10 @@ export default {
     },
     created() {
         // 通过 Event Bus 进行组件间通信，来折叠侧边栏
+        // 注册监听
         bus.$on('collapse', msg => {
             this.collapse = msg;
+            // 发送事件
             bus.$emit('collapse-content', msg);
         });
     }

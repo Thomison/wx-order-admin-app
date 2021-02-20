@@ -37,9 +37,9 @@ const router =  new Router({
                     meta: { title: 'tab选项卡' }
                 },
                 {
-                    path: '/table',
-                    component: () => import(/* webpackChunkName: "table" */ '../components/page/BaseTable.vue'),
-                    meta: { title: '基础表格' }
+                    path: '/category',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/CategoryTable.vue'),
+                    meta: { title: '分类表格' }
                 },
                 {
                     path: '/form',
