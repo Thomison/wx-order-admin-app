@@ -165,7 +165,7 @@
 
 <script>
     export default {
-        name: 'tabs',
+        name: 'goodsTable',
         data() {
             return {
                 // 店铺及其商品数据

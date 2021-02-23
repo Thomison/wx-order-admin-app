@@ -65,63 +65,24 @@ export default {
                     title: '系统首页'
                 },
                 {
-                    icon: 'el-icon-lx-cascades',
-                    index: 'table',
-                    title: '基础表格'
-                },
-                {
                     icon: 'el-icon-lx-copy',
-                    index: 'tabs',
-                    title: 'tab选项卡'
+                    index: 'goods',
+                    title: '商品管理'
                 },
                 {
                     icon: 'el-icon-lx-calendar',
-                    index: '3',
-                    title: '商品相关',
-                    subs: [
-                        {
-                            index: 'category',
-                            title: '分类管理'
-                        },
-                        // {
-                        //     index: '3-2',
-                        //     title: '商品管理'
-                        // },
-                        // {
-                        //     index: '3-2',
-                        //     title: '三级菜单',
-                        //     subs: [
-                        //         {
-                        //             index: 'editor',
-                        //             title: '富文本编辑器'
-                        //         },
-                        //         {
-                        //             index: 'markdown',
-                        //             title: 'markdown编辑器'
-                        //         }
-                        //     ]
-                        // },
-                        {
-                            index: 'upload',
-                            title: '文件上传'
-                        }
-                    ]
+                    index: 'category',
+                    title: '分类管理',
+                },
+                {
+                    icon: 'el-icon-lx-copy',
+                    index: 'category',
+                    title: '订单管理'
                 },
                 {
                     icon: 'el-icon-lx-emoji',
                     index: 'icon',
                     title: '自定义图标'
-                },
-                {
-                    icon: 'el-icon-lx-warn',
-                    index: '5',
-                    title: '错误处理',
-                    subs: [
-                        {
-                            index: '404',
-                            title: '404页面'
-                        }
-                    ]
                 },
             ]
         };
