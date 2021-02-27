@@ -32,6 +32,11 @@ const router =  new Router({
                     meta: { title: '系统首页'},
                 },
                 {
+                    path: '/users',
+                    component: () => import(/* webpackChunkName: "tabs" */ '../components/page/UsersTable.vue'),
+                    meta: { title: '用户管理' }
+                },
+                {
                     path: '/goods',
                     component: () => import(/* webpackChunkName: "tabs" */ '../components/page/GoodsTable.vue'),
                     meta: { title: '商品管理' }
@@ -43,14 +48,19 @@ const router =  new Router({
                 },
                 {
                     path: '/orders',
-                    component: () => import(/* webpackChunkName: "table" */ '../components/page/CategoryTable.vue'),
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/OrdersTable.vue'),
                     meta: { title: '订单管理' }
                 },
                 {
-                    path: '/icon',
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
-                    meta: { title: '自定义图标' }
+                    path: '/coupons',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/CouponsTable.vue'),
+                    meta: { title: '优惠券管理' }
                 },
+                // {
+                //     path: '/icon',
+                //     component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
+                //     meta: { title: '自定义图标' }
+                // },
                 // {
                 //     // 图片上传组件
                 //     path: '/upload',

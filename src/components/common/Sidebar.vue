@@ -66,24 +66,34 @@ export default {
                 },
                 {
                     icon: 'el-icon-lx-copy',
+                    index: 'users',
+                    title: '用户管理'
+                },
+                {
+                    icon: 'el-icon-lx-copy',
                     index: 'goods',
                     title: '商品管理'
                 },
                 {
-                    icon: 'el-icon-lx-calendar',
+                    icon: 'el-icon-lx-copy',
                     index: 'category',
                     title: '分类管理',
                 },
                 {
                     icon: 'el-icon-lx-copy',
-                    index: 'category',
+                    index: 'orders',
                     title: '订单管理'
                 },
                 {
-                    icon: 'el-icon-lx-emoji',
-                    index: 'icon',
-                    title: '自定义图标'
+                    icon: 'el-icon-lx-copy',
+                    index: 'coupons',
+                    title: '优惠券管理'
                 },
+                // {
+                //     icon: 'el-icon-lx-emoji',
+                //     index: 'icon',
+                //     title: '自定义图标'
+                // },
             ]
         };
     },
