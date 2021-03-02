@@ -11,7 +11,7 @@ const router =  new Router({
             path: '/',
             redirect: '/dashboard',
             meta: {
-                auth: false,
+                auth: true,
             }
         },
         {
@@ -24,37 +24,58 @@ const router =  new Router({
         {
             path: '/',
             component: () => import('../components/common/Home'),
-            meta: { title: '自述文件'},
+            meta: {
+                title: '自述文件',
+                auth: true
+            },
             children: [
                 {
                     path: '/dashboard',
                     component: () => import('../components/page/Dashboard'),
-                    meta: { title: '系统首页'},
+                    meta: {
+                        title: '系统首页',
+                        auth: true
+                    },
                 },
                 {
                     path: '/users',
                     component: () => import(/* webpackChunkName: "tabs" */ '../components/page/UsersTable.vue'),
-                    meta: { title: '用户管理' }
+                    meta: {
+                        title: '用户管理',
+                        auth: true
+                    }
                 },
                 {
                     path: '/goods',
                     component: () => import(/* webpackChunkName: "tabs" */ '../components/page/GoodsTable.vue'),
-                    meta: { title: '商品管理' }
+                    meta: {
+                        title: '商品管理',
+                        auth: true
+                    }
                 },
                 {
                     path: '/category',
                     component: () => import(/* webpackChunkName: "table" */ '../components/page/CategoryTable.vue'),
-                    meta: { title: '分类管理' }
+                    meta: {
+                        title: '分类管理',
+                        auth: true
+                    }
                 },
                 {
                     path: '/orders',
                     component: () => import(/* webpackChunkName: "table" */ '../components/page/OrdersTable.vue'),
-                    meta: { title: '订单管理' }
+                    meta: {
+                        title: '订单管理',
+                        auth: true
+                    }
                 },
                 {
                     path: '/coupons',
                     component: () => import(/* webpackChunkName: "table" */ '../components/page/CouponsTable.vue'),
-                    meta: { title: '优惠券管理' }
+                    meta: {
+                        title: '优惠券管理',
+                        auth: true
+                    }
                 },
                 // {
                 //     path: '/icon',
@@ -70,7 +91,10 @@ const router =  new Router({
                 {
                     path: '/404',
                     component: () => import(/* webpackChunkName: "404" */ '../components/page/404.vue'),
-                    meta: { title: '404' }
+                    meta: {
+                        title: '404',
+                        auth: true
+                    }
                 },
             ]
         },

@@ -20,6 +20,11 @@
                     <template v-slot="slot">
                         <el-table :data="slot.row.orderItems">
                             <el-table-column prop="goodName" label="商品名称" align="center"></el-table-column>
+                            <el-table-column label="商品图片" align="center">
+                                <template slot-scope="scope">
+                                    <el-image :src="scope.row.goodImageUrl"></el-image>
+                                </template>
+                            </el-table-column>
                             <el-table-column prop="cateName" label="商品分类" align="center"></el-table-column>
                             <el-table-column prop="storeName" label="商店名称" align="center"></el-table-column>
                             <el-table-column prop="goodPrice" label="商品价格" align="center"></el-table-column>
@@ -143,7 +148,7 @@
                 },
                 // 用于分页
                 currentPage:1,
-                pageSize:1,
+                pageSize:5,
                 total:0,
             }
         },
