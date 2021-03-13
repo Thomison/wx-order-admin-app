@@ -89,6 +89,11 @@ export default {
                     index: 'coupons',
                     title: '优惠券管理'
                 },
+                {
+                    icon: 'el-icon-lx-copy',
+                    index: 'records',
+                    title: '访问记录'
+                }
                 // {
                 //     icon: 'el-icon-lx-emoji',
                 //     index: 'icon',

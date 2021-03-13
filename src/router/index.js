@@ -77,6 +77,14 @@ const router =  new Router({
                         auth: true
                     }
                 },
+                {
+                    path: '/records',
+                    component: () => import(/* webpackChunkName: "table" */ '../components/page/RecordTable.vue'),
+                    meta: {
+                        title: '访问记录',
+                        auth: true
+                    }
+                },
                 // {
                 //     path: '/icon',
                 //     component: () => import(/* webpackChunkName: "icon" */ '../components/page/Icon.vue'),
