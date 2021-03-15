@@ -27,8 +27,8 @@
                     <el-table :data="curGoodList.slice((currentPage-1)*pageSize, currentPage*pageSize)" border class="table">
                         <el-table-column prop="goodName" label="商品名称" align="center"></el-table-column>
                         <el-table-column prop="cateName" label="商品类别" align="center"></el-table-column>
-                        <el-table-column prop="goodOldPrice" label="商品原始价格" align="center"></el-table-column>
-                        <el-table-column prop="goodNewPrice" label="商品当前价格" align="center"></el-table-column>
+<!--                        <el-table-column prop="goodOldPrice" label="商品原始价格" align="center"></el-table-column>-->
+                        <el-table-column prop="goodNewPrice" label="商品价格" align="center"></el-table-column>
                         <el-table-column label="商品图片" align="center">
                             <template slot-scope="scope">
                                 <el-image :src="scope.row.goodImageUrl"></el-image>
@@ -63,8 +63,8 @@
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
                         :current-page="currentPage"
-                        :page-size="1"
-                        :page-sizes="[1, 2, 3, 4]"
+                        :page-size="5"
+                        :page-sizes="[5, 10]"
                         :total="total">
                     </el-pagination>
                 </div>

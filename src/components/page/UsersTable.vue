@@ -29,12 +29,12 @@
                         <span v-else>不详</span>
                     </template>
                 </el-table-column>
-                <el-table-column label="是否价格混淆" align="center">
-                    <template slot-scope="{row}">
-                        <span v-if="row.confuse">是</span>
-                        <span v-else>否</span>
-                    </template>
-                </el-table-column>
+<!--                <el-table-column label="是否价格混淆" align="center">-->
+<!--                    <template slot-scope="{row}">-->
+<!--                        <span v-if="row.confuse">是</span>-->
+<!--                        <span v-else>否</span>-->
+<!--                    </template>-->
+<!--                </el-table-column>-->
                 <el-table-column label="用户余额" align="center">
                     <template slot-scope="{row}">
                         <span style="color: red">￥{{row.money}}</span>

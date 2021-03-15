@@ -257,5 +257,8 @@
         width: 40px;
         height: 40px;
     }
+    /*el-table-column{*/
+    /*    height: 50px;*/
+    /*}*/
 </style>
 

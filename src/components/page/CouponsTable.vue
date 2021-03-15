@@ -52,32 +52,32 @@
                         <span> {{statusMap[row.couponStatus]}} </span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="goodsType" label="优惠券使用限制" align="center">
+                <el-table-column prop="goodsType" label="所属店铺" align="center">
                     <template slot-scope="{row}">
-                        <span> {{goodsTypeMap[row.couponStatus]}} </span>
+                        <span> {{goodsTypeMap[row.storeId]}} </span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="timeType" label="有效期类型" align="center">
-                    <template slot-scope="{row}">
-                        <span v-if="row.timeType===0">基于领取后的有效时间</span>
-                        <span v-else>基于开始时间到结束时间</span>
-                    </template>
-                </el-table-column>
+<!--                <el-table-column prop="timeType" label="有效期类型" align="center">-->
+<!--                    <template slot-scope="{row}">-->
+<!--                        <span v-if="row.timeType===0">基于领取后的有效时间</span>-->
+<!--                        <span v-else>基于开始时间到结束时间</span>-->
+<!--                    </template>-->
+<!--                </el-table-column>-->
                 <el-table-column prop="days" label="有效期" align="center">
                     <template slot-scope="{row}">
-                        <span>领取后{{row.days}}天内有效</span>
+                        <span>{{row.days}}天</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="startTime" label="开始时间" align="center">
-                    <template slot-scope="{row}">
-                        <span>{{row.startTime || '无'}}</span>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="endTime" label="结束时间" align="center">
-                    <template slot-scope="{row}">
-                        <span>{{row.endTime || '无'}}</span>
-                    </template>
-                </el-table-column>
+<!--                <el-table-column prop="startTime" label="开始时间" align="center">-->
+<!--                    <template slot-scope="{row}">-->
+<!--                        <span>{{row.startTime || '无'}}</span>-->
+<!--                    </template>-->
+<!--                </el-table-column>-->
+<!--                <el-table-column prop="endTime" label="结束时间" align="center">-->
+<!--                    <template slot-scope="{row}">-->
+<!--                        <span>{{row.endTime || '无'}}</span>-->
+<!--                    </template>-->
+<!--                </el-table-column>-->
                 <el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
                 <el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
 
@@ -140,8 +140,8 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="优惠券使用限制">
-                    <el-select v-model="editForm.goodsType">
+                <el-form-item label="优惠券所属店铺">
+                    <el-select v-model="editForm.storeId">
                         <el-option
                             v-for="item in goodsTypeOption"
                             :key="item.value"
@@ -191,8 +191,8 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="优惠券使用限制">
-                    <el-select v-model="addForm.goodsType" placeholder="请选择优惠券的使用范围">
+                <el-form-item label="优惠券所属店铺">
+                    <el-select v-model="addForm.storeId" placeholder="请选择优惠券所属店铺">
                         <el-option
                             v-for="item in goodsTypeOption"
                             :key="item.value"
@@ -242,22 +242,17 @@
                     }
                 ],
                 goodsTypeMap: {
-                    '0': '全商品',
-                    '1': '类目限制',
-                    '2': '商品限制'
+                    '1': '店铺A',
+                    '2': '店铺B'
                 },
                 goodsTypeOption: [
                     {
-                        value: 0,
-                        label: '全商品'
-                    },
-                    {
                         value: 1,
-                        label: '类目限制',
+                        label: '店铺A'
                     },
                     {
                         value: 2,
-                        label: '商品限制',
+                        label: '店铺B',
                     }
                 ],
                 // 优惠券列表
