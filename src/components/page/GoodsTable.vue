@@ -27,15 +27,13 @@
                     <el-table :data="curGoodList.slice((currentPage-1)*pageSize, currentPage*pageSize)" border class="table">
                         <el-table-column prop="goodName" label="商品名称" align="center"></el-table-column>
                         <el-table-column prop="cateName" label="商品类别" align="center"></el-table-column>
-<!--                        <el-table-column prop="goodOldPrice" label="商品原始价格" align="center"></el-table-column>-->
-                        <el-table-column prop="goodNewPrice" label="商品价格" align="center"></el-table-column>
+                        <el-table-column prop="goodPrice" label="商品价格" align="center"></el-table-column>
                         <el-table-column label="商品图片" align="center">
                             <template slot-scope="scope">
                                 <el-image :src="scope.row.goodImageUrl"></el-image>
                             </template>
                         </el-table-column>
                         <el-table-column prop="goodSaleNum" label="商品销量" align="center"></el-table-column>
-                        <el-table-column prop="goodStock" label="商品库存" align="center"></el-table-column>
                         <el-table-column prop="creatTime" label="创建时间" align="center"></el-table-column>
                         <el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
                         <el-table-column label="操作" width="180" align="center">
@@ -63,7 +61,7 @@
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
                         :current-page="currentPage"
-                        :page-size="5"
+                        :page-size="10"
                         :page-sizes="[5, 10]"
                         :total="total">
                     </el-pagination>
@@ -100,14 +98,8 @@
                 <el-form-item label="商品图片URL地址">
                     <el-input v-model="editForm.imageUrl"></el-input>
                 </el-form-item>
-                <el-form-item label="商品原始价格">
-                    <el-input v-model="editForm.oldPrice"></el-input>
-                </el-form-item>
-                <el-form-item label="商品当前价格">
-                    <el-input v-model="editForm.newPrice"></el-input>
-                </el-form-item>
-                <el-form-item label="商品库存">
-                    <el-input v-model="editForm.stockNum"></el-input>
+                <el-form-item label="商品价格">
+                    <el-input v-model="editForm.price"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -145,14 +137,8 @@
                 <el-form-item label="商品图片URL地址">
                     <el-input v-model="addForm.imageUrl"></el-input>
                 </el-form-item>
-                <el-form-item label="商品原始价格">
-                    <el-input v-model="addForm.oldPrice"></el-input>
-                </el-form-item>
-                <el-form-item label="商品当前价格">
-                    <el-input v-model="addForm.newPrice"></el-input>
-                </el-form-item>
-                <el-form-item label="商品库存">
-                    <el-input v-model="addForm.stockNum"></el-input>
+                <el-form-item label="商品价格">
+                    <el-input v-model="addForm.price"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -182,9 +168,7 @@
                     id:-1,
                     name:'',
                     imageUrl:'',
-                    oldPrice:-1,
-                    newPrice:-1,
-                    stockNum:-1,
+                    price:-1,
                     cateId:-1,
                     cateName:'',
                     storeId:-1,
@@ -271,9 +255,7 @@
                 this.editForm.id = row.goodId;
                 this.editForm.name = row.goodName;
                 this.editForm.imageUrl = row.goodImageUrl;
-                this.editForm.oldPrice = row.goodOldPrice;
-                this.editForm.newPrice = row.goodNewPrice;
-                this.editForm.stockNum = row.goodStock;
+                this.editForm.price = row.goodPrice;
                 this.editForm.cateId = row.cateId;
                 this.editForm.cateName = row.cateName;
                 this.editForm.storeId = row.storeId;

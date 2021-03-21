@@ -43,11 +43,11 @@
                 </el-table-column>
                 <el-table-column prop="orderTotalAmount" label="订单总金额" align="center"></el-table-column>
                 <el-table-column prop="discountAmount" label="优惠金额" align="center"></el-table-column>
-                <el-table-column prop="couponName" label="优惠券名称" align="center">
-                    <template slot-scope="{row}">
-                        <span>{{row.couponName || '无'}}</span>
-                    </template>
-                </el-table-column>
+<!--                <el-table-column prop="couponName" label="优惠券名称" align="center">-->
+<!--                    <template slot-scope="{row}">-->
+<!--                        <span>{{row.couponName || '无'}}</span>-->
+<!--                    </template>-->
+<!--                </el-table-column>-->
                 <el-table-column prop="payTotalAmount" label="支付总金额" align="center"></el-table-column>
                 <el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
                 <el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
@@ -117,8 +117,7 @@
                 orderStatusMap: {
                     '0': '待付款',
                     '1': '待收货',
-                    '2': '已完成',
-                    '3': '已取消'
+                    '2': '已完成'
                 },
                 orderStatusOption: [
                     {
@@ -132,10 +131,6 @@
                     {
                         value: 2,
                         label: '已完成',
-                    },
-                    {
-                        value: 3,
-                        label: '已取消'
                     }
                 ],
                 // 订单列表

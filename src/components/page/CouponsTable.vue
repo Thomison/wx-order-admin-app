@@ -10,6 +10,7 @@
 
         <!--        内容      -->
         <div class="container">
+
             <!--        工具栏     -->
             <div class="handle-box">
                 <el-button
@@ -19,6 +20,7 @@
                     @click="handleAdd"
                 >新增优惠券</el-button>
             </div>
+
             <!--                表格      -->
             <el-table
                 :data="couponList.slice((currentPage-1)*pageSize, currentPage*pageSize)"
@@ -38,7 +40,7 @@
                         <span v-else>{{row.total}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="couponMin" label="要求的最少消费金额" align="center"></el-table-column>
+                <el-table-column prop="couponMin" label="最少消费金额" align="center"></el-table-column>
                 <el-table-column prop="discount" label="优惠金额" align="center"></el-table-column>
                 <el-table-column prop="couponLimit" label="用户可以领取的优惠券数量" align="center">
                     <template slot-scope="{row}">
@@ -47,37 +49,30 @@
                     </template>
                 </el-table-column>
 
-                <el-table-column prop="couponStatus" label="优惠券状态" align="center">
-                    <template slot-scope="{row}">
-                        <span> {{statusMap[row.couponStatus]}} </span>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="goodsType" label="所属店铺" align="center">
-                    <template slot-scope="{row}">
-                        <span> {{goodsTypeMap[row.storeId]}} </span>
-                    </template>
-                </el-table-column>
-<!--                <el-table-column prop="timeType" label="有效期类型" align="center">-->
+<!--                <el-table-column prop="couponStatus" label="优惠券状态" align="center">-->
 <!--                    <template slot-scope="{row}">-->
-<!--                        <span v-if="row.timeType===0">基于领取后的有效时间</span>-->
-<!--                        <span v-else>基于开始时间到结束时间</span>-->
+<!--                        <span> {{statusMap[row.couponStatus]}} </span>-->
 <!--                    </template>-->
 <!--                </el-table-column>-->
-                <el-table-column prop="days" label="有效期" align="center">
+
+                <el-table-column prop="storeId" label="店铺id" align="center">
                     <template slot-scope="{row}">
-                        <span>{{row.days}}天</span>
+                        <span v-if="row.storeId===0"> 任意店铺 </span>
+                        <span v-else> {{row.storeId}} </span>
                     </template>
                 </el-table-column>
-<!--                <el-table-column prop="startTime" label="开始时间" align="center">-->
-<!--                    <template slot-scope="{row}">-->
-<!--                        <span>{{row.startTime || '无'}}</span>-->
-<!--                    </template>-->
-<!--                </el-table-column>-->
-<!--                <el-table-column prop="endTime" label="结束时间" align="center">-->
-<!--                    <template slot-scope="{row}">-->
-<!--                        <span>{{row.endTime || '无'}}</span>-->
-<!--                    </template>-->
-<!--                </el-table-column>-->
+                <el-table-column prop="goodId" label="商品id" align="center">
+                    <template slot-scope="{row}">
+                        <span v-if="row.goodId===0"> 任意商品 </span>
+                        <span v-else> {{row.goodId}} </span>
+                    </template>
+                </el-table-column>
+
+                <el-table-column prop="seconds" label="有效期" align="center">
+                    <template slot-scope="{row}">
+                        <span>{{row.seconds}} 秒 </span>
+                    </template>
+                </el-table-column>
                 <el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
                 <el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
 
@@ -121,7 +116,7 @@
                 <el-form-item label="优惠券描述">
                     <el-input type="textarea" v-model="editForm.couponDesc"></el-input>
                 </el-form-item>
-                <el-form-item label="优惠券数量">
+                <el-form-item label="优惠券数量(0为不限量)">
                     <el-input v-model="editForm.total"></el-input>
                 </el-form-item>
                 <el-form-item label="最低消费金额">
@@ -129,16 +124,6 @@
                 </el-form-item>
                 <el-form-item label="优惠金额">
                     <el-input v-model="editForm.discount"></el-input>
-                </el-form-item>
-                <el-form-item label="优惠券状态">
-                    <el-select v-model="editForm.couponStatus">
-                        <el-option
-                            v-for="item in statusOption"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                        </el-option>
-                    </el-select>
                 </el-form-item>
                 <el-form-item label="优惠券所属店铺">
                     <el-select v-model="editForm.storeId">
@@ -150,11 +135,14 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="用户领取的优惠券数量限制">
+                <el-form-item label="优惠券所属商品">
+                    <el-input v-model="editForm.goodId"></el-input>
+                </el-form-item>
+                <el-form-item label="可领取数量(0为不限量)">
                     <el-input v-model="editForm.couponLimit"></el-input>
                 </el-form-item>
-                <el-form-item label="优惠券有效期">
-                    <el-input v-model="editForm.days"></el-input>
+                <el-form-item label="优惠券有效期(秒为单位)">
+                    <el-input v-model="editForm.seconds"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -181,16 +169,6 @@
                 <el-form-item label="优惠金额">
                     <el-input v-model="addForm.discount" placeholder="请输入优惠券的优惠金额"></el-input>
                 </el-form-item>
-                <el-form-item label="优惠券状态">
-                    <el-select v-model="addForm.couponStatus" placeholder="请选择优惠券的状态">
-                        <el-option
-                            v-for="item in statusOption"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
                 <el-form-item label="优惠券所属店铺">
                     <el-select v-model="addForm.storeId" placeholder="请选择优惠券所属店铺">
                         <el-option
@@ -201,11 +179,14 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
+                <el-form-item label="优惠券所属商品">
+                    <el-input v-model="addForm.goodId" placeholder="请输入优惠券所属商品id"></el-input>
+                </el-form-item>
                 <el-form-item label="用户领取的优惠券数量限制">
                     <el-input v-model="addForm.couponLimit" placeholder="请输入用户领取的优惠券数量限制(0表示不限量)"></el-input>
                 </el-form-item>
                 <el-form-item label="优惠券有效期">
-                    <el-input v-model="addForm.days" placeholder="请输入优惠券的有效期(天为单位)"></el-input>
+                    <el-input v-model="addForm.seconds" placeholder="请输入优惠券的有效期(秒为单位)"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
@@ -217,30 +198,11 @@
 </template>
 
 <script>
+    import moment from 'moment';
     export default {
         name: 'couponsTable',
         data() {
             return {
-                // 优惠券状态映射表
-                statusMap: {
-                    '0': '正常使用',
-                    '1': '已过期',
-                    '2': '已下架'
-                },
-                statusOption: [
-                    {
-                        value: 0,
-                        label: '正常使用'
-                    },
-                    {
-                        value: 1,
-                        label: '已过期',
-                    },
-                    {
-                        value: 2,
-                        label: '已下架',
-                    }
-                ],
                 goodsTypeMap: {
                     '1': '店铺A',
                     '2': '店铺B'
@@ -263,19 +225,18 @@
                     id:0,
                     couponName:'',
                     couponDesc:'',
+                    storeId:0,
+                    goodId:0,
                     total:0,
                     couponMin:0,
                     discount:0,
                     couponLimit:0,
-                    couponStatus:0,
-                    goodsType:0,
-                    timeType:0,
-                    days:0,
+                    seconds:0,
                 },
                 // 用于新增
                 addVisible: false,
                 addForm:{
-                    timeType:0, // 默认基于领取时间开始计算有效期
+                    // timeType:0, // 默认基于领取时间开始计算有效期
                 },
                 // 用于分页
                 currentPage:1,
@@ -328,11 +289,14 @@
                 this.editForm.couponMin = row.couponMin;
                 this.editForm.discount = row.discount;
                 this.editForm.couponLimit = row.couponLimit;
-                this.editForm.couponStatus = row.couponStatus;
-                this.editForm.goodsType = row.goodsType;
-                this.editForm.timeType = row.timeType;
-                this.editForm.days = row.days;
+                // this.editForm.couponStatus = row.couponStatus;
+                // this.editForm.goodsType = row.goodsType;
+                // this.editForm.timeType = row.timeType;
+                this.editForm.seconds = row.seconds;
+                this.editForm.storeId = row.storeId;
+                this.editForm.goodId = row.goodId;
                 this.editVisible = true;
+
             },
             // 保存编辑
             saveEdit() {
