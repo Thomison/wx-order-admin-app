@@ -18,8 +18,12 @@ Vue.use(axios);
 
 Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
-// Vue.prototype.baseUrl = 'http://82.156.28.45:8081';
-Vue.prototype.baseUrl = 'http://localhost:8081';
+
+// 服务器
+Vue.prototype.baseUrl = 'http://82.156.28.45:8081';
+
+// 本地
+// Vue.prototype.baseUrl = 'http://localhost:8081';
 
 
 /* eslint-disable no-new */
